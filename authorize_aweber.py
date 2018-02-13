@@ -1,11 +1,9 @@
 import os
 from aweber_api import AWeberAPI
 
-# NOTE: This is a direct copy of the code example here: https://labs.aweber.com/getting_started/private#2
-
 # replace XXX with your keys
-consumer_key = 'XXX'
-consumer_secret = 'XXX'
+consumer_key = os.environ['AWEBER_KEY']
+consumer_secret = os.environ['AWEBER_SECRET']
 
 # create new instance of AWeberAPI
 application = AWeberAPI(consumer_key, consumer_secret)

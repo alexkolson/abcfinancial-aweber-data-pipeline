@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const fs = require('fs');
 
 const {
   ABC_APP_ID,
@@ -53,6 +54,6 @@ makeRequest('members', 1, [], (membersErr, members) => {
       return console.log(prospectsErr);
     }
 
-    console.log({ members, prospects });
+    fs.writeFileSync('members-and-prospects.json', JSON.stringify({ members, prospects }, null, 4), 'utf8');
   });
 });

@@ -1,3 +1,5 @@
 authorize
 node_modules
-run-script
+get-members-and-prospects
+subscribe-members-and-prospects
+members-and-prospects.json

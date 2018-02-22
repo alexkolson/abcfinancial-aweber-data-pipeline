@@ -33,20 +33,40 @@ account = aweber.get_account(access_key, access_secret)
 
 for member in data['members']:
     try:
-        print member['personal']['email']
-        # list_url = '/accounts/%s/lists/%s' % (account.id, members_list_id)
-        # list_ = account.load_from_url(list_url)
+        print 'Member: %s' % member['personal']['email']
+        list_url = '/accounts/%s/lists/%s' % (account.id, members_list_id)
+        list_ = account.load_from_url(list_url)
 
         # create a subscriber
-        # params = {
-        #    'email': '',
-        # }
-        # subscribers = list_.subscribers
-        # new_subscriber = subscribers.create(**params)
+        params = {
+            'email': member['personal']['email'],
+        }
+        subscribers = list_.subscribers
+        new_subscriber = subscribers.create(**params)
 
         # success!
         # pylint: disable=E1601
-        # print "A new subscriber was added to the %s list!" % (list_.name)
+        print "A new subscriber was added to the %s list!" % (list_.name)
+    except (KeyError, APIException), exc:
+        print 'Error: %s' % str(exc)
+        continue
+
+for prospect in data['prospects']:
+    try:
+        print 'Prospect: %s' % prospect['personal']['email']
+        list_url = '/accounts/%s/lists/%s' % (account.id, prospects_list_id)
+        list_ = account.load_from_url(list_url)
+
+        # create a subscriber
+        params = {
+            'email': prospect['personal']['email'],
+        }
+        subscribers = list_.subscribers
+        new_subscriber = subscribers.create(**params)
+
+        # success!
+        # pylint: disable=E1601
+        print "A new subscriber was added to the %s list!" % (list_.name)
     except (KeyError, APIException), exc:
         print 'Error: %s' % str(exc)
         continue

@@ -12,6 +12,7 @@ const {
 
 
 function makeRequest(resource, page, accumulator, done) {
+  console.log(`retrieving ${resource} page ${page}, this will take a while`);
   request.get(`${ABC_API_URL}/${ABC_CLUB_NUMBER}/${resource}`, {
     qs: { page },
     headers: {
@@ -24,6 +25,8 @@ function makeRequest(resource, page, accumulator, done) {
       console.log(err);
       return done(err);
     }
+
+    console.log(`finsihed retrieving ${resource} page ${page}`);
 
     const res = JSON.parse(body);
 
